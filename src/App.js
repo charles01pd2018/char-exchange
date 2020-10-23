@@ -1,12 +1,15 @@
 import React from 'react';
 import Web3 from 'web3';
 
+// contracts
+import Token from './abis/Token.json';
+import EthSwap from './abis/EthSwap.json';
+
 // components
-import Navbar from './components/navbar'
+import Navbar from './components/navigation/navbar'
 
 
 class App extends React.Component {
-
 
   // loads Metamask web browser instance
   async loadWeb3() {
@@ -28,17 +31,40 @@ class App extends React.Component {
 
 // loads data from the blockchain from the user's Metamask account
   async loadBlockchainData() {
-    
+    const web3 = window.web3
+
     // user account wallet address
-    let account = await window.web3.eth.getAccounts()
+    let account = await web3.eth.getAccounts()
     this.setState({ account: account [0] }) 
     
     // user ETH balance
-    let ethBalance = await window.web3.eth.getBalance(this.state.account)
+    let ethBalance = await web3.eth.getBalance(this.state.account)
     this.setState({ ethBalance: ethBalance })
 
-    console.log(`Wallet Address: ${ account [0] }`)
-    console.log(`ETH Amount: ${ ethBalance }`)
+    // logs
+    console.log(`Wallet address: ${ account[0] }`)
+    console.log(`ETH amount: ${ ethBalance }`)
+
+
+    // loading token
+    const token_netID = await web3.eth.net.getId()
+    const token_data = Token.networks[token_netID]
+
+    if (token_data) {
+      // setting the token contract
+      var token = web3.eth.Contract(Token.abi, token_data.address)
+      this.setState({ token })
+
+      // setting the user's token balance
+      var token_balance = await token.methods.balanceOf(this.state.account).call()
+      this.setState({ tokenBalance: token_balance.toString() })
+    }
+     else
+      window.alert('Token contract no deployed to detected network')
+
+    // logs
+    console.log(`Token contract: ${ token }`)
+    console.log(`User token balance: ${ token_balance }`)
   }
 
 
@@ -57,7 +83,9 @@ class App extends React.Component {
 
     this.state = {
       account: '',
-      ethBalance: '0'
+      ethBalance: '0',
+      token: '',
+      tokenBalance: ''
     }
   }
 
@@ -91,4 +119,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App

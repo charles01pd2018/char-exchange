@@ -1,5 +1,8 @@
 import React from 'react';
 
+// components
+import Account from './account';
+
 
 class Navbar extends React.Component { 
 
@@ -15,8 +18,8 @@ class Navbar extends React.Component {
         >
           Ethswap
         </a>
-
-          <p>{ this.props.account }</p>
+        
+        <Account account={ this.props.account }/>
 
         </nav>
     )
