@@ -4101,12 +4101,12 @@
         }
       },
       "links": {},
-      "address": "0x80F796d567c60a832C0f9fc7fB4B1871669A885c",
-      "transactionHash": "0xeab67272a2d929c512c3412d38e70cfa20e344bf2d0f9f0586dcfdcdda54e4c9"
+      "address": "0xe3C494910E5F035B464016277b36911D0f57e76d",
+      "transactionHash": "0x8730972f60b0c315148c806d468347021095dbabbea1189daa81beb7e89bb013"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-10-19T00:28:00.988Z",
+  "updatedAt": "2020-10-24T19:19:37.400Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

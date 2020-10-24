@@ -6,7 +6,8 @@ import Token from './abis/Token.json';
 import EthSwap from './abis/EthSwap.json';
 
 // components
-import Navbar from './components/navigation/navbar'
+import Navbar from './components/navigation/navbar';
+import Main from './components/main';
 
 
 class App extends React.Component {
@@ -47,24 +48,42 @@ class App extends React.Component {
 
 
     // loading token
-    const token_netID = await web3.eth.net.getId()
-    const token_data = Token.networks[token_netID]
+    const netID = await web3.eth.net.getId()
+    const token_data = Token.networks[netID]
 
     if (token_data) {
       // setting the token contract
-      var token = web3.eth.Contract(Token.abi, token_data.address)
+      let token = web3.eth.Contract(Token.abi, token_data.address)
       this.setState({ token })
 
       // setting the user's token balance
-      var token_balance = await token.methods.balanceOf(this.state.account).call()
+      let token_balance = await token.methods.balanceOf(this.state.account).call()
       this.setState({ tokenBalance: token_balance.toString() })
     }
      else
-      window.alert('Token contract no deployed to detected network')
-
+      window.alert('Token contract not deployed to detected network')
+    
     // logs
-    console.log(`Token contract: ${ token }`)
-    console.log(`User token balance: ${ token_balance }`)
+    console.log(`Token contract: ${ this.state.token }`)
+    console.log(`User token balance: ${ this.state.tokenBalance }`)
+    
+    
+    // loading EthSwap
+    const ethSwap_data = EthSwap.networks[netID]
+    
+    if (ethSwap_data) {
+
+      let ethSwap = new web3.eth.Contract(EthSwap.abi, ethSwap_data.address)
+      this.setState({ ethSwap })
+    }
+    else 
+
+      window.alert('Ethswap contract no deployed to detected network.')
+    
+    // logs
+    console.log(`EthSwap contract: ${ this.state.ethSwap }`)
+
+    this.setState({ loading: false })
   }
 
 
@@ -82,15 +101,19 @@ class App extends React.Component {
     super(props)
 
     this.state = {
+
       account: '',
       ethBalance: '0',
-      token: '',
-      tokenBalance: ''
+      tokenBalance: '0',
+      token: {},
+      ethSwap: {},
+      loading: true
     }
   }
 
 
   render() {
+
     return (
       <div>
         
@@ -108,7 +131,8 @@ class App extends React.Component {
                 >
                 </a>
 
-                <h1> Yuhurd </h1>
+                {this.state.loading ? 
+                ( <p id='loader' className='text-center'> Loading... </p> ) : ( <Main /> ) } 
                 
               </div>
             </main>
