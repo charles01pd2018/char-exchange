@@ -95,6 +95,19 @@ class App extends React.Component {
     console.log(window.web3)
     }  
 
+  // buying DApp tokens on the exchange
+  buyTokens = ( etherAmount ) => {
+
+    this.setState( { loading: true } )
+
+    this.state.ethSwap.methods.buyTokens()
+      .send( { value: etherAmount, from: this.state.account} )
+      .on('transactionHash', ( hash ) => {
+
+        this.setState( { loading: false } )
+      })
+  }
+
 
   constructor(props) {
 
@@ -132,7 +145,8 @@ class App extends React.Component {
                 </a>
 
                 {this.state.loading ? 
-                ( <p id='loader' className='text-center'> Loading... </p> ) : ( <Main /> ) } 
+                ( <p id='loader' className='text-center'> Loading... </p> ) : 
+                ( <Main ethBalance={this.state.ethBalance} tokenBalance={this.state.tokenBalance} buyTokens={this.buyTokens} /> ) } 
                 
               </div>
             </main>
