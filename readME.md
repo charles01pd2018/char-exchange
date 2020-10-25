@@ -5,7 +5,7 @@ Swap out your ETH for some CHAR tokens!
 ## Installations
 
 
-
+hello
 
 npm install
 npm install identicon.js --save
