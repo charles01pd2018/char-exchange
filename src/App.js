@@ -108,6 +108,24 @@ class App extends React.Component {
       })
   }
 
+  // selling DApp tokens on the exchange
+  sellTokens = ( tokenAmount ) => {
+
+    this.setState( { loading: true } )
+
+    this.state.token.methods.approve( this.state.ethSwap.address, tokenAmount )
+      .send({ from: this.state.account } )
+      .on('transactionHash', ( hash ) => {
+
+          this.state.ethSwap.methods.sellTokens(tokenAmount)
+          .send({ from: this.state.account } )
+          .on('transactionHash', ( hash ) => {
+
+            this.setState( { loading: false } ) 
+          }) 
+      }) 
+  }
+
 
   constructor(props) {
 
@@ -146,7 +164,8 @@ class App extends React.Component {
 
                 {this.state.loading ? 
                 ( <p id='loader' className='text-center'> Loading... </p> ) : 
-                ( <Main ethBalance={this.state.ethBalance} tokenBalance={this.state.tokenBalance} buyTokens={this.buyTokens} /> ) } 
+                ( <Main ethBalance={this.state.ethBalance} tokenBalance={this.state.tokenBalance} 
+                  buyTokens={this.buyTokens} sellTokens={this.sellTokens} /> ) } 
                 
               </div>
             </main>
