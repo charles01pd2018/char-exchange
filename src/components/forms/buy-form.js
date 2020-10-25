@@ -2,7 +2,7 @@ import React from 'react';
 
 // token logos
 import eth_logo from '../../assets/eth_logo.png'
-import token_logo from '../../assets/token_logo.png'
+import char_logo from '../../assets/char_logo.png'
 
 
 class BuyForm extends React.Component {
@@ -74,9 +74,9 @@ class BuyForm extends React.Component {
                     <div className='input-group-append'>
                         <div className='input-group-text'>
 
-                            <img src={token_logo} height='32' alt='' />
+                            <img src={char_logo} height='32' alt='' />
 
-                            &nbsp; DApp
+                            &nbsp; CHAR
                         </div>
                     </div>
                 </div>

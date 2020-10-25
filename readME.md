@@ -1,5 +1,6 @@
-## Eth Swap Web Application
-Swap out your ETH for a cool token!
+# ![CHAR Token Swap Cover](/public/assets/creatives/cover.png)
+## CHAR Token Swap Web Application
+Swap out your ETH for some CHAR tokens!
 
 ## Installations
 
