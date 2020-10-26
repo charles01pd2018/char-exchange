@@ -1,5 +1,5 @@
+# CHAR Token Swap Web Application
 # ![CHAR Token Swap Cover](/public/assets/cover.png)
-## CHAR Token Swap Web Application
 Swap out your ETH for some CHAR tokens!
 or... swap out some CHAR tokens for ETH!
 
