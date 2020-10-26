@@ -87,7 +87,7 @@ class BuyForm extends React.Component {
                     </span>
 
                     <span className='float-right text-muted'>
-                        1 ETH = 100 DApp
+                        1 ETH = 100 CHAR
                     </span>
                 </div>
 

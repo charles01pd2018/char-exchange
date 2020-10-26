@@ -1,8 +1,7 @@
 {
-  "name": "eth-swap",
+  "name": "char-exchange",
   "version": "0.1.0",
-  "description": "Uniswap 2.0",
-  "author": "gregory@dappuniversity.com",
+  "description": "CHAR Exchange",
   "dependencies": {
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
