@@ -12,6 +12,7 @@ Developed on a test blockchain with the help of Ganache. Built from the tutorial
 
 ## Installations
 npm install
+npm install --g truffle@5.1.14
 npm install identicon.js --save
 
 
